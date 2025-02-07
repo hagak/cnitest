@@ -11,4 +11,4 @@ resources:
   - ./node-exporter/ks.yaml
   - ./prometheus-operator/ks.yaml
   - ./vector/ks.yaml
-  - ./victoria-metrics/ks.yaml
+  #- ./victoria-metrics/ks.yaml
