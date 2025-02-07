@@ -6,8 +6,4 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  # - ./home-assistant/ks.yaml
-  # - ./mosquitto/ks.yaml
-  # - ./music-assistant/ks.yaml
-  - ./scrypted/ks.yaml
-  # - ./zigbee2mqtt/ks.yaml
+  #- ./scrypted/ks.yaml
