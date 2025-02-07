@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *appname
   interval: 10m
-  path: ./kubernetes/main/apps/flux-system/eso-role/app
+  path: ./kubernetes/test/apps/flux-system/eso-role/app
   prune: true
   sourceRef:
     kind: GitRepository
