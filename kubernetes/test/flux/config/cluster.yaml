@@ -6,7 +6,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 10m
   url: ssh://git@github.com/hagak/cnitest.git
   ref:
     branch: main
