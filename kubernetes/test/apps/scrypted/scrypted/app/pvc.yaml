@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: ${APP}
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
