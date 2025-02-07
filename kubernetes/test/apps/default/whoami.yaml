@@ -4,12 +4,6 @@ kind: Ingress
 metadata:
   annotations:
     ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/auth-signin: 'https://oauth.test.thetank.org/oauth2/signin'
-    nginx.ingress.kubernetes.io/server-snippet: |
-      proxy_set_header X-Auth-Request-Redirect https://$host$request_uri;
-    nginx.ingress.kubernetes.io/auth-url: 'http://oauth2-proxy.network.svc.cluster.local/oauth2/auth'
-    nginx.ingress.kubernetes.io/auth-response-headers: Authorization, x-auth-request-preferred-username, x-auth-request-user, x-auth-request-email
   labels:
     app.kubernetes.io/name: whoami
   name: whoami

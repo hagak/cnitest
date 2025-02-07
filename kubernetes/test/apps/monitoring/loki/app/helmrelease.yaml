@@ -115,11 +115,6 @@ spec:
         enabled: true
         ingressClassName: "internal"
         annotations:
-          nginx.ingress.kubernetes.io/auth-signin: 'https://oauth.test.thetank.org/oauth2/signin'
-          nginx.ingress.kubernetes.io/server-snippet: |
-            proxy_set_header X-Auth-Request-Redirect https://$host$request_uri;
-          nginx.ingress.kubernetes.io/auth-url: 'http://oauth2-proxy.network.svc.cluster.local/oauth2/auth'
-          nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
           nginx.ingress.kubernetes.io/whitelist-source-range: |
             10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
         hosts:

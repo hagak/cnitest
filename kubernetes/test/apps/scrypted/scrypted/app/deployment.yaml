@@ -22,7 +22,7 @@ spec:
             "name":"multus-lan",
             "namespace": "network",
             "mac": "3a:95:41:65:5c:e5",
-            "ips": ["10.100.30.200/16"]
+            "ips": ["10.100.35.200/16"]
           }]
 
     spec:
