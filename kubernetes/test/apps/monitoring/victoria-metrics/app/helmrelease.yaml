@@ -110,7 +110,7 @@ spec:
 
     # VM Alerting (however, this just watches & passes alerts to alertmanager)
     vmalert:
-      enabled: true
+      enabled: false
       spec:
         replicaCount: 2
         resources:
@@ -142,7 +142,7 @@ spec:
 
     # VM Data scraping
     vmagent:
-      enabled: true
+      enabled: false
       spec:
         replicaCount: 1
         shardCount: 2
