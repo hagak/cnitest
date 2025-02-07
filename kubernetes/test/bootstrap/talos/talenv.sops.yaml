@@ -1,5 +1,5 @@
 clusterName: ENC[AES256_GCM,data:tkQ+6w==,iv:gWguqT+QWENFpF/u89Qvub6JBsCmEGcolUsmin0Nxgc=,tag:4+rXJX+3gw8lL0QZR1+XyA==,type:str]
-clusterDNSSuffix: ENC[AES256_GCM,data:RorcKfKLDbzKmuXvsgovlQ==,iv:kR8vFsYElmvSZpVkq7b1cHWPEPpuMMuGl7tnVYeUCkw=,tag:2bGZqxtyCIt7WjtTfpw/mQ==,type:str]
+clusterDNSSuffix: ENC[AES256_GCM,data:31ZvBsSzmcPyP5nVQe9lLQ==,iv:11zeAL8MhQsTkGAT/a33loAVWmaJX2s5tX/uSG9tti0=,tag:Vub9EfLw54xYpxQCAawuHg==,type:str]
 clusterEndpointIP: ENC[AES256_GCM,data:snt+vzih8QCBM+AT5g==,iv:kRFI+OP/P95g//3GDVRnQ9svqEehGXpslFmcKRtmsV4=,tag:ab4jWTiuPCfR72nGyIEZtA==,type:str]
 sops:
     kms: []
@@ -7,8 +7,8 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-07T18:59:27Z"
-    mac: ENC[AES256_GCM,data:heW8DQm93U0S7icWSeZUzFpDA+6lc1RRBXCie2fZRNhxNk0OhlUh69nl6DHdyYllFNd5KjaJV3/il3PAoitSsKBCIeCnMbnmGts6/Ypczs2aGUSeX0yd30fhcPDlAvlKkJI3Tc+LAf1kQy5p81t/u7YPdckCvUhmM5uytHyfoxA=,iv:ceeFbO3TkXRDQWlAYVP9yU7nquYjaSfSAT2ylHDtM4A=,tag:5EqFW+g2C0eLm2ITQAMX8w==,type:str]
+    lastmodified: "2025-02-07T19:13:53Z"
+    mac: ENC[AES256_GCM,data:5TLpFjEENScoK+MAHTPH1rOGPFwzUHb9x9HA8htTvqqZf3j/CNLAHgTIeHnAbhxJVVNTdfIphtH/6fvPN3AGyH3g73gmJ87aS5quuUl61Ibzx/N0wWjnzJvvZjduPNswOBv3Uksex+JY5C7rJ7uuTIhn1eY5Sk4IKeJKOZn1sp0=,iv:9JBNWfrpx5awVdzZHU4GbMefZnDkNXgALtvuIVlM8eM=,tag:5AV/kYMYQO81VnL0VYkmxg==,type:str]
     pgp:
         - created_at: "2024-05-27T17:44:54Z"
           enc: |-

@@ -28,6 +28,7 @@ patches:
       nodeIP:
         validSubnets:
             - 10.100.10.0/24
+            - 10.100.90.0/24
       extraArgs:
         image-gc-high-threshold: 75
         image-gc-low-threshold: 65
@@ -85,6 +86,8 @@ nodes:
           deviceSelectors:
             - busPath: "fe1c0000.ethernet"
         dhcp: true
+        vip:
+          ip: ${clusterEndpointIP}
         vlans:
           - &vlan50
             vlanId: 50
@@ -126,6 +129,8 @@ nodes:
           deviceSelectors:
             - busPath: "fe1c0000.ethernet"
         dhcp: true
+        vip:
+          ip: ${clusterEndpointIP}
         vlans:
           - *vlan50
 
@@ -162,6 +167,8 @@ nodes:
           deviceSelectors:
             - busPath: "fe1c0000.ethernet"
         dhcp: true
+        vip:
+          ip: ${clusterEndpointIP}
         vlans:
           - *vlan50
 

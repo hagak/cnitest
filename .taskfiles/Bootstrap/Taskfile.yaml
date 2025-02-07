@@ -11,24 +11,7 @@ tasks:
     cmds:
       - task: :talos:bootstrap
         vars: *vars
-      - task: :rook:reset
-        vars: *vars
-      - task: :talos:reboot
-        vars: *vars
       - task: :flux:bootstrap
         vars: *vars
     preconditions:
       - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      #- talosctl --context {{.cluster}} config info >/dev/null 2>&1
-
-  # storage:
-  #   vars: &vars
-  #     cluster: storage
-  #     playbook: cluster-installation
-  #   cmds:
-  #     - task: :ansible:venv
-  #       vars: *vars
-  #     - task: :ansible:run
-  #       vars: *vars
-  #     - task: :flux:bootstrap
-  #       vars: *vars
