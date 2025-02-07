@@ -1,0 +1,86 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/auth-signin: 'https://oauth.test.thetank.org/oauth2/signin'
+    nginx.ingress.kubernetes.io/server-snippet: |
+      proxy_set_header X-Auth-Request-Redirect https://$host$request_uri;
+    nginx.ingress.kubernetes.io/auth-url: 'http://oauth2-proxy.network.svc.cluster.local/oauth2/auth'
+    nginx.ingress.kubernetes.io/auth-response-headers: Authorization, x-auth-request-preferred-username, x-auth-request-user, x-auth-request-email
+  labels:
+    app.kubernetes.io/name: whoami
+  name: whoami
+  namespace: default
+spec:
+  ingressClassName: internal
+  rules:
+  - host: whoami.test.thetank.org
+    http:
+      paths:
+      - backend:
+          service:
+            name: whoami
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  namespace: default
+  labels:
+    app: whoami
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        name: whoami
+        app: whoami
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network",
+                "ips": ["192.168.30.201/24"],
+                "mac": "92:cf:d7:05:70:34"
+              }]
+    spec:
+      containers:
+      - name: whoami
+        image: containous/whoami
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: whoami
+  namespace: default
+  # annotations:
+  #   io.cilium/lb-ipam-ips: 10.100.90.99
+spec:
+  selector:
+    app: whoami
+  #type: LoadBalancer
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80

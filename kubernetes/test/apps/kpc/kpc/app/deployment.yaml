@@ -1,0 +1,43 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ${APP}
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: ${APP}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${APP}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      serviceAccountName: kubernetes-pfsense-controller
+      containers:
+        - name: kubernetes-pfsense-controller
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 500m
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          image: travisghansen/kubernetes-pfsense-controller:v0.5.14
+          env:
+            - name: PFSENSE_URL
+              value: "https://firewall.home.thetank.org:4443"
+              # allow self-signed certs
+            - name: PFSENSE_INSECURE
+              value: "false"
+            - name: PFSENSE_USERNAME
+              value: "admin"
+            - name: PFSENSE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kpc
+                  key: pfsense-password

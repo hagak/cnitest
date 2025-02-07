@@ -1,0 +1,12 @@
+creation_rules:
+  - # IMPORTANT: Keep this rule first
+    path_regex: kubernetes/.*/talos/.*\.sops\.ya?ml$
+    input_type: yaml
+    encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca|clusterName|clusterDNSSuffix|clusterEndpointIP)$
+    pgp: FBE42E23D51A49417D87A0458239DED3C7FC9400
+  - path_regex: .*.yaml
+    encrypted_regex: ^(data|stringData)$
+    pgp: FBE42E23D51A49417D87A0458239DED3C7FC9400
+  - path_regex: kubernetes/.+\.secret(\.sops)?\.env
+    input_type: env
+    pgp: FBE42E23D51A49417D87A0458239DED3C7FC9400

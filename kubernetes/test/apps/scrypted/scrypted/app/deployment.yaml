@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrypted
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: scrypted
+      app.kubernetes.io/instance: scrypted
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: scrypted
+        app.kubernetes.io/instance: scrypted
+      annotations:
+        reloader.stakater.com/auto: "true"
+        k8s.v1.cni.cncf.io/networks: |
+          [{
+            "name":"multus-lan",
+            "namespace": "network",
+            "mac": "3a:95:41:65:5c:e5",
+            "ips": ["10.100.30.200/16"]
+          }]
+
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app.kubernetes.io/name"
+                    operator: In
+                    values:
+                      - frigate
+              topologyKey: "kubernetes.io/hostname"
+              namespaces: ["scrypted", "frigate"]
+      serviceAccountName: scrypted
+      securityContext: {}
+      containers:
+      - name: scrypted
+        securityContext: {}
+        image: ghcr.io/bjw-s-labs/scrypted:0.137.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: https
+          containerPort: 10443
+          protocol: TCP
+        - name: http
+          containerPort: 11080
+          protocol: TCP
+        - name: homekitbridge01
+          containerPort: 49320
+          protocol: TCP
+        - name: homekitbridge02
+          containerPort: 51827
+          protocol: TCP
+        - name: mdns
+          containerPort: 5353
+          protocol: UDP
+          #          livenessProbe:
+          #            httpGet:
+          #              path: /
+          #              port: http
+          #          readinessProbe:
+          #            httpGet:
+          #              path: /
+          #              port: http
+        resources:
+          limits:
+            cpu: 8000m
+            memory: 4Gi
+          requests:
+            cpu: 650m
+            memory: 800Mi
+        volumeMounts:
+        - mountPath: /server/volume
+          name: scrypted-pv-storage
+      volumes:
+      - name: scrypted-pv-storage
+        persistentVolumeClaim:
+          claimName: ${APP}

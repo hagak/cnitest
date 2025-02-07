@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: test.thetank.org
+spec:
+  secretName: staging-thetank-org-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: test.thetank.org
+  dnsNames:
+    - test.thetank.org
+    - "*.test.thetank.org"

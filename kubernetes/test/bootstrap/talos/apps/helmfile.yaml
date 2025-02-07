@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/helmfile
+
+helmDefaults:
+  wait: true
+  waitForJobs: true
+  timeout: 600
+  recreatePods: true
+  force: true
+
+repositories:
+  - name: harbor-container-webhook
+    url: https://indeedeng.github.io/harbor-container-webhook/
+  - name: coredns
+    url: https://coredns.github.io/helm
+  - name: cilium
+    url: https://helm.cilium.io
+
+releases:
+  - name: prometheus-operator-crds
+    namespace: monitoring
+    chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
+    version: 18.0.0
+
+  - name: cilium
+    namespace: kube-system
+    chart: cilium/cilium
+    version: 1.16.6
+    wait: true
+    values:
+      - ../../../apps/kube-system/cilium/app/values.yaml
+    needs:
+      - monitoring/prometheus-operator-crds
+
+  - name: coredns
+    namespace: kube-system
+    chart: coredns/coredns
+    version: 1.39.0
+    values:
+      - ../../../apps/kube-system/coredns/app/helm-values.yaml
+    needs:
+      - kube-system/cilium

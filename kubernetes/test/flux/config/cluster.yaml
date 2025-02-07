@@ -1,0 +1,49 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/gitrepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: ssh://git@github.com/hagak/cnitest.git
+  ref:
+    branch: main
+  secretRef:
+    name: github-deploy
+  ignore: |
+    # exclude all
+    /*
+    # include flux directories
+    !/kubernetes/test
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster
+  namespace: flux-system
+spec:
+  interval: 30m
+  path: ./kubernetes/test/flux
+  prune: true
+  wait: false
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  # Enable decryption
+  decryption:
+    # Use the sops provider
+    provider: sops
+    secretRef:
+      # Reference the new 'sops-gpg' secret
+      name: sops-gpg
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+        optional: false
+      - name: cluster-secrets
+        kind: Secret
+        optional: true

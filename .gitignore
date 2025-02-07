@@ -1,0 +1,11 @@
+# GitHub actions binaries
+bin/
+.decrypted~*.yaml
+*.DS_Store
+scripts/_out/installer-arm64.tar
+kubernetes/test/kubeconfig
+_out/installer-arm64.tar
+config.php
+LOG_imapsync/2024_09_16_07_38_05_067_test1_test2.txt
+LOG_imapsync/2024_09_16_07_46_37_549_jeff_thetank_org_jeff_thetank_org.txt
+LOG_imapsync/2024_09_16_07_51_50_320_jeff_thetank_org_jeff_thetank_org.txt

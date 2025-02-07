@@ -1,0 +1,34 @@
+clusterName: ENC[AES256_GCM,data:WiU0YA==,iv:t0arF7OX+T4iq4I8tlTNEBN4DKGLqn5YnaRQtmzQtog=,tag:V1dwz2BthsYEgAENtchF2A==,type:str]
+clusterDNSSuffix: ENC[AES256_GCM,data:RorcKfKLDbzKmuXvsgovlQ==,iv:kR8vFsYElmvSZpVkq7b1cHWPEPpuMMuGl7tnVYeUCkw=,tag:2bGZqxtyCIt7WjtTfpw/mQ==,type:str]
+clusterEndpointIP: ENC[AES256_GCM,data:8AKUTLy677/fTva7Gw==,iv:A71EsoH4eoZ3FW1PhjnEh/5QffTht/eUTRHdT+RTv1Q=,tag:Xj1lmtk5IlbO3Qoz5rbYiA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2024-05-27T17:44:54Z"
+    mac: ENC[AES256_GCM,data:9jmEL8C3rz1/mPl8WSIFFjGABUY4zL0YQeEahGMvvnJX0BgqARVE5zVMY+2EfHhLzLu5RrqPtQqddMp5+wuDtT8dIwVnU3OOxfOpXW3ovC5iF9GZkeu0M9MO2Mma45ytq2vWoOPhCF16/h5/H8hnVg7fXz/ZgmJ0VMrBaeyorGE=,iv:MIIpGYTrLxz69pp+m6AMCR286QS3eNoAGqREIA7876E=,tag:qixrUlYSGffZDXQZt281Qw==,type:str]
+    pgp:
+        - created_at: "2024-05-27T17:44:54Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAxFxbSkPSmm+AQ/+JEp9noEEfvURgsNaUF8DPf4LYaxToJSLpaPHC8SKGt/C
+            7D7VTnRbxDL37xxg3xNZ3qOzBqOVZIPBLkS9xOeRmRW4bZuVeZJF+Cg4EYy3gZa4
+            utRGxorUPZxxW63GUD69i7BQVn6C5StQ0IEaCGelPLLnY8JQGx+XH3kk+VrvBjV+
+            Cb2B+Tn2T/cd2IF7eN7zTBTK0Zxcw248lpN+8OSjXV+03YtHVij1Sjd6Jx8xYWu5
+            y+E3SXSLLYHSLnpf+HpOyH8DzDA/uqPxQmVu1SJi1LKO2zllnoYpTkVigDCrANTI
+            q6dqSWWM8am+8vx4r4fy6P/MMAF7W8gAvTHDrMsnIgr5nOxhGg5O+PUV1Dbi1RiA
+            7ZUKJ4ltj9jLv/CLEYCYt9CUs6iTLk0AR91NJNS1H+i6tOz37iffgt56t38leIts
+            Wu78HaUTs0wml3qko2yJNKULPLwepjMy/Yr7XBjHjkpdiQo6Or4em2Y8bsJca42A
+            GIEXy8YzxovlT7WyspmOQxB32y3xlbYFWPYbeARlCoaJd6vLohIQWAPWMFYSSRQC
+            NsH4DwkEPSntMheCzBOKi+LmYhK6/5KOUzDKTYHj5cudxI7kEyagK/id2yg7RPAv
+            udyzeDO5TAg4nGVan9BDBd8KevGRpXA74cjJ/Uxu8su+aBxzOD6GBPNBGGMU3dvS
+            XAF2GdnmBQZVId5ji6ct3/OOw9NFzujt7LnZ/6htxYp9rwClQ1k+k+eyiTreU6yt
+            Lk3hEIJ1pmKucYz/172FiXkfVuMmHZ4uhDGm3hMJ1xfMGzmSsMHdz5YQoYoN
+            =gDoP
+            -----END PGP MESSAGE-----
+          fp: FBE42E23D51A49417D87A0458239DED3C7FC9400
+    encrypted_regex: ^(token|crt|key|id|secret|secretboxEncryptionSecret|ca|clusterName|clusterDNSSuffix|clusterEndpointIP)$
+    version: 3.8.1

@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: kube-system
+  name: kubernetes-pfsense-controller-config
+data:
+  config: |
+    controller-id: "main-cluster"
+    enabled: true
+    plugins:
+      metallb:
+        enabled: false
+        nodeLabelSelector:
+        nodeFieldSelector:
+        #configMap: "metallb-system/config"
+        # pick 1 implementation
+        bgp-implementation: openbgp
+        # bgp-implementation: frr
+        options:
+          openbgp:
+            # pass through to config.xml
+            template:
+              md5sigkey:
+              md5sigpass:
+              groupname: metallb
+              row:
+                - parameters: announce all
+                  parmvalue:
+          frr:
+            template:
+              peergroup: metallb
+      haproxy-declarative:
+        enabled: false
+      haproxy-ingress-proxy:
+        enabled: false
+        ingressLabelSelector:
+        ingressFieldSelector:
+        # works in conjunction with the ingress annotation 'haproxy-ingress-proxy.pfsense.org/enabled'
+        # if defaultEnabled is empty or true, you can disable specific ingresses by setting the annotation to false
+        # if defaultEnabled is false, you can enable specific ingresses by setting the annotation to true
+        defaultEnabled: true
+        defaultFrontend: http-80
+        defaultBackend: traefik
+        # by default anything is allowed
+        #allowedHostRegex: "/.*/"
+      pfsense-dns-services:
+        enabled: true
+        serviceLabelSelector:
+        serviceFieldSelector:
+        #allowedHostRegex: "/.*/"
+        dnsBackends:
+          dnsmasq:
+            enabled: false
+          unbound:
+            enabled: true
+      pfsense-dns-ingresses:
+        enabled: true
+        ingressLabelSelector:
+        ingressFieldSelector:
+        # works in conjunction with the ingress annotation 'dns.pfsense.org/enabled'
+        # if defaultEnabled is empty or true, you can disable specific ingresses by setting the annotation to false
+        # if defaultEnabled is false, you can enable specific ingresses by setting the annotation to true
+        defaultEnabled: true
+        #allowedHostRegex: "/.*/"
+        dnsBackends:
+          dnsmasq:
+            enabled: false
+          unbound:
+            enabled: true
+      pfsense-dns-haproxy-ingress-proxy:
+        enabled: false
+        #allowedHostRegex: "/.*/"
+        dnsBackends:
+          dnsmasq:
+            enabled: true
+          unbound:
+            enabled: true
+        frontends:
+          http-80:
+            hostname: http-80.k8s
+          primary_frontend_name2:
+            hostname: some-name.k8s
