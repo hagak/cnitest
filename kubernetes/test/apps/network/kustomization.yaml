@@ -7,7 +7,4 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./nginx/ks.yaml
-  - ./oauth2-proxy/ks.yaml
   - ./multus/ks.yaml
-  - ./ntp
-  - ./ipmi
