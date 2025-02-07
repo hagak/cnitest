@@ -10,3 +10,6 @@ main-k3snode01.yaml
 main-k3snode05.yaml
 main-k3snode06.yaml
 main-k3snode07.yaml
+test-k3snode01.yaml
+test-k3snode02.yaml
+test-k3snode03.yaml
